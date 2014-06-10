@@ -17,8 +17,6 @@
     movieInfo.synopsis = movieData[@"synopsis"];
     movieInfo.posterURL = movieData[@"posters"][@"original"];
     movieInfo.thumbnailURL = movieData[@"posters"][@"profile"];
-    movieInfo.thumbnail = nil;
-    movieInfo.poster = nil;
     return movieInfo;
 }
 

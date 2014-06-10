@@ -16,7 +16,5 @@
 @property (nonatomic, strong) NSString *synopsis;
 @property (nonatomic, strong) NSString *posterURL;
 @property (nonatomic, strong) NSString *thumbnailURL;
-@property (nonatomic, strong) UIImage *thumbnail;
-@property (nonatomic, strong) UIImage *poster;
 
 @end

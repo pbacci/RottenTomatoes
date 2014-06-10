@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *movieList;
+@property (strong, nonatomic) UIView *networkWarningView;
 
 - (void)refreshMovieList:(id)sender;
 
@@ -57,6 +58,17 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
 
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self refreshMovieList:nil];
+
+    int warningOffset = 60;
+    self.networkWarningView = [[UIView alloc] initWithFrame:CGRectMake(0, warningOffset, 320, 40)];
+    self.networkWarningView.backgroundColor = [UIColor redColor];
+    UILabel *warningLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    warningLabel.text = @"Network issue!";
+    [warningLabel setTextAlignment:NSTextAlignmentCenter];
+    warningLabel.font = [UIFont systemFontOfSize:20];
+    [self.networkWarningView addSubview:warningLabel];
+    [self.view addSubview:self.networkWarningView];
+    self.networkWarningView.hidden = true;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -67,6 +79,8 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
 {
     MovieDetailsViewController *mdvc = [[MovieDetailsViewController alloc] init];
     mdvc.movieInfo = self.movieList[indexPath.row];
+    MovieListCell *vc = (MovieListCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    mdvc.thumbnail = vc.posterView.image;
     [self.navigationController pushViewController:mdvc animated:YES];
 }
 
@@ -92,6 +106,7 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.networkWarningView.hidden = true;
         // Convert the information received in an array of MovieInfo
         NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
         for (NSDictionary *movieDict in responseObject[@"movies"])
@@ -102,18 +117,12 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
         self.movieList = tmpArray;
         cleanup_refresh_state();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Movie List"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        self.networkWarningView.hidden = false;
         // this sucks but has been happening frequently so read some data from a file
         [self fallbackReadingDataFromBundle];
         cleanup_refresh_state();
     }];
 
-    NSLog(@"Fetching data from URL %@", urlString);
     [operation start];
 }
 

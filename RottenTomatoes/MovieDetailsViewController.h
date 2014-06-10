@@ -13,5 +13,6 @@
 
 // expose the movieInfo as a property so the parent view controller can pass in the data
 @property MovieInfo *movieInfo;
+@property UIImage *thumbnail;
 
 @end
