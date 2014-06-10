@@ -10,13 +10,13 @@
 
 @implementation MovieInfo
 
-- (MovieInfo *)initWithMovieData:(NSDictionary *)movieData
+- (MovieInfo *)initWithTitle:(NSString *)title synopsis:(NSString *)synopsis posterURL:(NSString *)posterURL thumbnailURL:(NSString *)thumbnailURL
 {
     MovieInfo *movieInfo = [[MovieInfo alloc] init];
-    movieInfo.title = movieData[@"title"];
-    movieInfo.synopsis = movieData[@"synopsis"];
-    movieInfo.posterURL = movieData[@"posters"][@"original"];
-    movieInfo.thumbnailURL = movieData[@"posters"][@"profile"];
+    movieInfo.title = title;
+    movieInfo.synopsis = synopsis;
+    movieInfo.posterURL = posterURL;
+    movieInfo.thumbnailURL = thumbnailURL;
     return movieInfo;
 }
 

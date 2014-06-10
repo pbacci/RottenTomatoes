@@ -22,9 +22,6 @@
 
 - (void)refreshMovieList:(id)sender;
 
-// RottenTomatoes API has been rotten all saturday so creating a helper function to get unstuck
-- (void)fallbackReadingDataFromBundle;
-
 @end
 
 @implementation MovieListViewController
@@ -59,6 +56,7 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self refreshMovieList:nil];
 
+    // Create a custom view for a big red network warning.
     int warningOffset = 60;
     self.networkWarningView = [[UIView alloc] initWithFrame:CGRectMake(0, warningOffset, 320, 40)];
     self.networkWarningView.backgroundColor = [UIColor redColor];
@@ -111,15 +109,13 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
         NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
         for (NSDictionary *movieDict in responseObject[@"movies"])
         {
-            MovieInfo *movieInfo = [[MovieInfo alloc] initWithMovieData:movieDict];
+            MovieInfo *movieInfo = [[MovieInfo alloc] initWithTitle:movieDict[@"title"] synopsis:movieDict[@"synopsis"] posterURL:movieDict[@"posters"][@"original"] thumbnailURL:movieDict[@"posters"][@"profile"]];
             [tmpArray addObject:movieInfo];
         }
         self.movieList = tmpArray;
         cleanup_refresh_state();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.networkWarningView.hidden = false;
-        // this sucks but has been happening frequently so read some data from a file
-        [self fallbackReadingDataFromBundle];
         cleanup_refresh_state();
     }];
 
@@ -131,23 +127,6 @@ static NSString *MOVIES_LIST_ENDPOINT = @"/lists/dvds/top_rentals.json";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)fallbackReadingDataFromBundle
-{
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"dummy_data" ofType:@"json"];
-    NSString *myJSONstring = [[NSString alloc] initWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-
-    NSData *data = [myJSONstring dataUsingEncoding:NSUTF8StringEncoding];
-    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    // Convert the information received in an array of MovieInfo
-    NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *movieDict in [json objectForKey:@"movies"])
-    {
-        MovieInfo *movieInfo = [[MovieInfo alloc] initWithMovieData:movieDict];
-        [tmpArray addObject:movieInfo];
-    }
-    self.movieList = tmpArray;
 }
 
 @end

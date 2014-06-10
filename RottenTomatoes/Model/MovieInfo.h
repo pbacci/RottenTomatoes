@@ -10,7 +10,7 @@
 
 @interface MovieInfo : NSObject
 
-- (MovieInfo *)initWithMovieData:(NSDictionary *)movieData;
+- (MovieInfo *)initWithTitle:(NSString *)title synopsis:(NSString *)synopsis posterURL:(NSString *)posterURL thumbnailURL:(NSString *)thumbnailURL;
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *synopsis;

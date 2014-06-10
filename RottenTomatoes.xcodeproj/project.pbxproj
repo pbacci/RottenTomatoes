@@ -12,7 +12,6 @@
 		B38AF1F51943BEED00E63198 /* MovieListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B38AF1F31943BEED00E63198 /* MovieListCell.m */; };
 		B38AF1F61943BEED00E63198 /* MovieListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B38AF1F41943BEED00E63198 /* MovieListCell.xib */; };
 		B38AF1F91943C14900E63198 /* MovieInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B38AF1F81943C14900E63198 /* MovieInfo.m */; };
-		B38AF2011943F31000E63198 /* dummy_data.json in Resources */ = {isa = PBXBuildFile; fileRef = B38AF2001943F31000E63198 /* dummy_data.json */; };
 		B38AF20C1944DC4900E63198 /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38AF20A1944DC4900E63198 /* MovieDetailsViewController.m */; };
 		B38AF20D1944DC4900E63198 /* MovieDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B38AF20B1944DC4900E63198 /* MovieDetailsViewController.xib */; };
 		B3EB7DF919437D1E0084C4E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3EB7DF819437D1E0084C4E8 /* Foundation.framework */; };
@@ -51,7 +50,6 @@
 		B38AF1F41943BEED00E63198 /* MovieListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MovieListCell.xib; path = Views/MovieListCell.xib; sourceTree = "<group>"; };
 		B38AF1F71943C14900E63198 /* MovieInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovieInfo.h; path = Model/MovieInfo.h; sourceTree = "<group>"; };
 		B38AF1F81943C14900E63198 /* MovieInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovieInfo.m; path = Model/MovieInfo.m; sourceTree = "<group>"; };
-		B38AF2001943F31000E63198 /* dummy_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummy_data.json; sourceTree = "<group>"; };
 		B38AF2091944DC4900E63198 /* MovieDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailsViewController.h; sourceTree = "<group>"; };
 		B38AF20A1944DC4900E63198 /* MovieDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailsViewController.m; sourceTree = "<group>"; };
 		B38AF20B1944DC4900E63198 /* MovieDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieDetailsViewController.xib; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 		B3EB7DFF19437D1E0084C4E8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B38AF2001943F31000E63198 /* dummy_data.json */,
 				B3EB7E0019437D1E0084C4E8 /* RottenTomatoes-Info.plist */,
 				B3EB7E0119437D1E0084C4E8 /* InfoPlist.strings */,
 				B3EB7E0419437D1E0084C4E8 /* main.m */,
@@ -286,7 +283,6 @@
 				B38AF1EE1943924F00E63198 /* MovieListViewController.xib in Resources */,
 				B3EB7E0319437D1E0084C4E8 /* InfoPlist.strings in Resources */,
 				B38AF1F61943BEED00E63198 /* MovieListCell.xib in Resources */,
-				B38AF2011943F31000E63198 /* dummy_data.json in Resources */,
 				B38AF20D1944DC4900E63198 /* MovieDetailsViewController.xib in Resources */,
 				B3EB7E0B19437D1E0084C4E8 /* Images.xcassets in Resources */,
 			);
